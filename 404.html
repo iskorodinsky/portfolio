@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <!-- Google Analytics: portfolio visitor measurement -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LK6W23M2PF"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-LK6W23M2PF', {allow_google_signals: false, allow_ad_personalization_signals: false});
+(function () {
+  var measurementId = 'G-LK6W23M2PF';
+  var storageKey = 'portfolio_internal_traffic';
+  var host = window.location.hostname;
+  var params = new URLSearchParams(window.location.search);
+
+  try {
+    if (params.get('internal') === '1') localStorage.setItem(storageKey, '1');
+    if (params.get('internal') === '0') localStorage.removeItem(storageKey);
+  } catch (error) {}
+
+  var excluded = /^(localhost|127\.0\.0\.1|::1)$/.test(host);
+  try {
+    excluded = excluded || localStorage.getItem(storageKey) === '1';
+  } catch (error) {}
+
+  if (excluded) {
+    window['ga-disable-' + measurementId] = true;
+    return;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', measurementId, {
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false
+  });
+
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+  document.head.appendChild(script);
+})();
 </script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Page not found — Inessa Skorodinsky</title><style>body{font:18px/1.6 Georgia,serif;max-width:620px;margin:15vh auto;padding:28px;color:#111}a{color:inherit}</style></head><body><p>Inessa Skorodinsky</p><h1>This page has moved.</h1><p><a href="/">Return to the portfolio</a> or <a href="mailto:iskorodinsky@yahoo.com">get in touch</a>.</p></body></html>
