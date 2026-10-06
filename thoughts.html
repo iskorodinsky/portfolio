@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js"><head>
 <!-- Google Analytics: portfolio visitor measurement -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LK6W23M2PF"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-LK6W23M2PF', {allow_google_signals: false, allow_ad_personalization_signals: false});
+(function () {
+  var measurementId = 'G-LK6W23M2PF';
+  var storageKey = 'portfolio_internal_traffic';
+  var host = window.location.hostname;
+  var params = new URLSearchParams(window.location.search);
+
+  try {
+    if (params.get('internal') === '1') localStorage.setItem(storageKey, '1');
+    if (params.get('internal') === '0') localStorage.removeItem(storageKey);
+  } catch (error) {}
+
+  var excluded = /^(localhost|127\.0\.0\.1|::1)$/.test(host);
+  try {
+    excluded = excluded || localStorage.getItem(storageKey) === '1';
+  } catch (error) {}
+
+  if (excluded) {
+    window['ga-disable-' + measurementId] = true;
+    return;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', measurementId, {
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false
+  });
+
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+  document.head.appendChild(script);
+})();
 </script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Thoughts — Inessa Skorodinsky</title><meta name="description" content="Notes by Inessa Skorodinsky on running creative teams and making complex ideas clear."><link rel="canonical" href="https://inessaskorodinsky.com/thoughts.html"><meta property="og:title" content="Thoughts — Inessa Skorodinsky"><meta property="og:description" content="Notes by Inessa Skorodinsky on running creative teams and making complex ideas clear."><meta property="og:type" content="website"><meta property="og:url" content="https://inessaskorodinsky.com/thoughts.html"><meta property="og:image" content="https://inessaskorodinsky.com/assets/has-cover.webp"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#ffffff"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20260922"><script>document.documentElement.classList.remove('no-js')</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Thoughts \u2014 Inessa Skorodinsky", "url": "https://inessaskorodinsky.com/thoughts.html", "description": "Notes by Inessa Skorodinsky on running creative teams and making complex ideas clear.", "about": {"@type": "Person", "@id": "https://inessaskorodinsky.com/#person", "name": "Inessa Skorodinsky", "jobTitle": "Brand, Experience and Design Leader", "url": "https://inessaskorodinsky.com/", "sameAs": ["https://www.linkedin.com/in/inessaskorodinsky"]}}</script><script src="assets/site.js?v=20260922" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><div class="wrap">
 <nav class="sitenav" aria-label="Main navigation">
